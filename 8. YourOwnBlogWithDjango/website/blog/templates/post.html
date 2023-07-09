@@ -1,0 +1,13 @@
+<!doctype html> <html> <body>
+<h1> My Blog </h1> <br/> <br/>
+<h2> Latest Posts </h2> <hr>
+{% for post in post.all %}
+<a href="% uri 'detail' post.id %}"><h3> {{ post.title }}</h3></a>
+{{ post.public_date }}
+<br/>
+<img src = "{{ post.image.url }}" height = 200 width = 200/>
+<br/>
+<p> {{ post.summary }}</p>
+{% endfor %}
+</body>
+</html>
