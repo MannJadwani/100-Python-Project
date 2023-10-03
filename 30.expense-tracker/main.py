@@ -1,8 +1,9 @@
 import sqlite3
 import datetime
 
-conn = sqlite3.connect("expense.db")
-cur=conn.cursor()
+conn = sqlite3.connect("expenses.db")
+cur = conn.cursor()
+
 
 while True:
     print("Select an option")
@@ -13,22 +14,23 @@ while True:
 
     if choice==1:
         date = input("Enter the date of the expense (YYYY-MM-DD)")
-        description = input("Enter the description of the expense")
+        description = input("Enter the description of the expenses")
         cur.execute("SELECT DISTINCT category FROM expenses")
         catagories = cur.fetchall()
         print("Select a category by number:")
         for idx,category in enumerate(catagories):
             print(f"{idx+1}. {category[0]}")
-        print(f"{len(catagories+1)}. Create a new category")
-        category_choice= input
+        print(f"{len(catagories)+1}. Create a new category")
+        category_choice= int(input())
+        
         if category_choice == (len(catagories)+1):
             category = input("Enter the new category name: ")
         else:
             category = catagories[category_choice-1][0]
 
-        price = input("Enter the price of the expense")
 
-        cur.execute("INSERT INTO expenses (Date,description,category,price) VALUES (?,?,?,?), (date,)")
+        price = input("Enter the price of the expense")
+        cur.execute("INSERT INTO expenses (Date,description,category,price) VALUES (?,?,?,?)",(date,description,category,price))
     elif choice==2:
         print("Select an opetion")
         print("View all expenses")
